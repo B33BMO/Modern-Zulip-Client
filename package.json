@@ -1,23 +1,33 @@
 {
-  "name": "zulip-modern",
-  "version": "0.1.0",
+  "name": "zulip-modern-desktop",
   "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "main": ".electron/dist/main.cjs",
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
-    "start": "next start"
-  },
-  "dependencies": {
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "next": "15.5.3"
+    "dev": "concurrently -k -n WEB,BUILD,ELECTRON \"next dev -p 3000\" \"node ./electron/scripts/build-watch.js\" \"wait-on http://localhost:3000 .electron/dist/main.cjs && electron .electron/dist/main.cjs\"",
+    "build": "node ./electron/scripts/build-once.js",
+    "start": "electron .electron/dist/main.cjs"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4"
+    "@tailwindcss/postcss": "^4.1.13",
+    "@types/react": "19.1.13",
+    "autoprefixer": "^10.4.21",
+    "concurrently": "^8.2.2",
+    "electron": "^30.0.0",
+    "esbuild": "^0.21.5",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.13",
+    "typescript": "5.9.2",
+    "wait-on": "^7.2.0"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "keytar": "^7.9.0",
+    "lucide-react": "^0.544.0",
+    "next": "^15.5.3",
+    "node-fetch": "^3.3.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   }
 }

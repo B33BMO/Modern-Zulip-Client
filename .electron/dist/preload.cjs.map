@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../electron/preload.ts"],
+  "sourcesContent": ["import { contextBridge, ipcRenderer } from \"electron\";\n\ncontextBridge.exposeInMainWorld(\"zulipDesktop\", {\n  loginWithApiKey: (email: string, apiKey: string, baseUrl: string) =>\n    ipcRenderer.invoke(\"zulip:loginApiKey\", { email, apiKey, baseUrl }),\n  loginWithPassword: (email: string, password: string, baseUrl: string) =>\n    ipcRenderer.invoke(\"zulip:loginPassword\", { email, password, baseUrl }),\n  logout: (baseUrl: string, email: string) => ipcRenderer.invoke(\"zulip:logout\", { baseUrl, email }),\n  get: (pathAndQuery: string) => ipcRenderer.invoke(\"zulip:get\", pathAndQuery),\n  postForm: (path: string, form: Record<string, string>) =>\n    ipcRenderer.invoke(\"zulip:postForm\", { path, form }),\n});\n"],
+  "mappings": ";;;AAAA,sBAA2C;AAE3C,8BAAc,kBAAkB,gBAAgB;AAAA,EAC9C,iBAAiB,CAAC,OAAe,QAAgB,YAC/C,4BAAY,OAAO,qBAAqB,EAAE,OAAO,QAAQ,QAAQ,CAAC;AAAA,EACpE,mBAAmB,CAAC,OAAe,UAAkB,YACnD,4BAAY,OAAO,uBAAuB,EAAE,OAAO,UAAU,QAAQ,CAAC;AAAA,EACxE,QAAQ,CAAC,SAAiB,UAAkB,4BAAY,OAAO,gBAAgB,EAAE,SAAS,MAAM,CAAC;AAAA,EACjG,KAAK,CAAC,iBAAyB,4BAAY,OAAO,aAAa,YAAY;AAAA,EAC3E,UAAU,CAAC,MAAc,SACvB,4BAAY,OAAO,kBAAkB,EAAE,MAAM,KAAK,CAAC;AACvD,CAAC;",
+  "names": []
+}
